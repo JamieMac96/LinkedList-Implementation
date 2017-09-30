@@ -1,6 +1,9 @@
-package com.mcmanus.linkedlist;
+package com.macmanus.linkedlist.main;
 
 public class LinkedList<T>{
+
+    private Node<T> first;
+
     public boolean add(T element){
         return false;
     }
@@ -33,4 +36,3 @@ public class LinkedList<T>{
         return element;
     }
 }
-
