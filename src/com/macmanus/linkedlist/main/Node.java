@@ -17,5 +17,15 @@ public class Node<T> {
         this.last = last;
     }
 
+    public Node<T> getNext(){
+        return next;
+    }
 
+    public Node<T> getLast(){
+        return last;
+    }
+
+    public T getData(){
+        return data;
+    }
 }
