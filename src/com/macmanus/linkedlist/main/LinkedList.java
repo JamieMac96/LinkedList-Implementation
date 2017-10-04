@@ -28,12 +28,30 @@ public class LinkedList<T>{
         size++;
     }
 
-    public boolean clear(){
-        return false;
+    public void clear(){
+        Node n = head.getNext();
+        head.setNext(null);
+        head = null;
+        while(n != null){
+            Node next = n.getNext();
+            n.setLast(null);
+            n.setNext(null);
+            n = null;
+            n = next;
+        }
+
+        this.head = null;
+        this.tail = null;
+        size = 0;
     }
 
     public T get(int index){
+        if(head == null){
+            return null;
+        }
+
         int ctr = 0;
+
         Node current = head;
         for(int i = 0; i < index; i++){
             current = current.getNext();
@@ -46,12 +64,40 @@ public class LinkedList<T>{
         return size;
     }
 
-    public T remove(int index){
-        return (T) new Object();
+    public void remove(int index){
+        if(index >= size || index < 0){
+            return;
+        }
+
+        int ctr = 0;
+
+        Node nodeToRemove = head;
+        while(ctr < index){
+            nodeToRemove = nodeToRemove.getNext();
+        }
+        removeNode(nodeToRemove);
     }
 
-    public T remove (T element){
-        return element;
+    public void remove (T element){
+
+        if(head.getData().equals(element)){
+            removeNode(head);
+        }
+        else if(tail.getData().equals(element)){
+            removeNode(tail);
+        }
+        else {
+            Node<T> nodeToRemove = head;
+            while (!nodeToRemove.getData().equals(element)) {
+                if (nodeToRemove == null) {
+                    return;
+                }
+                else{
+                    nodeToRemove = nodeToRemove.getNext();
+                }
+            }
+            removeNode(nodeToRemove);
+        }
     }
 
     public T set(int index, T element){
@@ -107,5 +153,17 @@ public class LinkedList<T>{
         nodeAtIndex.setLast(newNode);
         newNode.setLast(nodeBeforeIndex);
         newNode.setNext(nodeAtIndex);
+    }
+
+    private void removeNode(Node<T> nodeToRemove){
+        Node last = nodeToRemove.getLast();
+        Node next = nodeToRemove.getNext();
+
+        last.setNext(next);
+        next.setLast(last);
+
+        nodeToRemove.setLast(null);
+        nodeToRemove.setNext(null);
+        nodeToRemove = null;
     }
 }

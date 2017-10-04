@@ -24,5 +24,13 @@ public class UseList {
             System.out.println(current.getData());
             current = current.getNext();
         }
+
+        myStrings.clear();
+
+        System.out.println("\nAfter clearing:");
+
+        for(int i = 0; i < myStrings.size(); i++){
+            System.out.println(myStrings.get(i));
+        }
     }
 }
