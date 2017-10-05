@@ -15,9 +15,9 @@ public class UseList {
             System.out.println(myStrings.get(i));
         }
 
-        System.out.println("\n\nRecommended method: ");
-
         myStrings.add(2, "sdjdfnsjkdfbsdfsdfj");
+
+        System.out.println("\n\nAfter adding: ");
 
         Node<String> current = myStrings.getHead();
         while(current != null){
@@ -25,9 +25,9 @@ public class UseList {
             current = current.getNext();
         }
 
-        myStrings.clear();
+        myStrings.remove(0);
 
-        System.out.println("\nAfter clearing:");
+        System.out.println("\nAfter removing:");
 
         for(int i = 0; i < myStrings.size(); i++){
             System.out.println(myStrings.get(i));

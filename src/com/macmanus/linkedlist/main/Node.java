@@ -28,4 +28,27 @@ public class Node<T> {
     public T getData(){
         return data;
     }
+
+    public  void setData(T data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString(){
+        if(last != null && next != null) {
+            return last.getData() + "<====" + data + "====>" + next.getData();
+        }
+        else if(last != null && next == null){
+            return last.getData() + "<====" + data + "====>null";
+        }
+        else if(last == null && next != null){
+            return "null<====" + data + "====>" + next.getData();
+        }
+        else if(last == null && next == null){
+            return "null<====" + data + "====>null";
+        }
+        else{
+            return data + "";
+        }
+    }
 }
