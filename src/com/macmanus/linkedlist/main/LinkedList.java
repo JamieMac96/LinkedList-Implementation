@@ -140,6 +140,24 @@ public class LinkedList<T>{
         }
     }
 
+    public T getFirst(){
+        if(head != null){
+            return head.getData();
+        }
+        else{
+            return null;
+        }
+    }
+
+    public T getLast(){
+        if(tail != null){
+            return tail.getData();
+        }
+        else{
+            return null;
+        }
+    }
+
     public Node<T> getHead(){
         return head;
     }
