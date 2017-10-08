@@ -24,27 +24,39 @@ public class LinkedList<T>{
         else{
             addAtIndex(index, element);
         }
+    }
+
+    public void addFirst(T element){
+        Node newNode = new Node<T>(element);
+
+        if(tail == null){
+            head = newNode;
+            tail = newNode;
+        }
+        else{
+            newNode.setNext(head);
+            head.setLast(newNode);
+            head=newNode;
+        }
         size++;
     }
 
-    public void clear(){
-        Node n = head.getNext();
-        head.setNext(null);
-        head = null;
-        while(n != null){
-            Node next = n.getNext();
-            n.setLast(null);
-            n.setNext(null);
-            n = null;
-            n = next;
-        }
+    public void addLast(T element){
+        Node newNode = new Node<T>(element);
 
-        this.head = null;
-        this.tail = null;
-        size = 0;
+        if(tail == null){
+            head = newNode;
+            tail = newNode;
+        }
+        else{
+            newNode.setLast(tail);
+            tail.setNext(newNode);
+            tail=newNode;
+        }
+        size++;
     }
 
-    public T get(int index){
+    public T get(int index) throws IndexOutOfBoundsException{
 
         if(head == null){
             return null;
@@ -61,8 +73,26 @@ public class LinkedList<T>{
         return (T) current.getData();
     }
 
-    public int size(){
-        return size;
+    public T getFirst(){
+        if(head != null){
+            return head.getData();
+        }
+        else{
+            return null;
+        }
+    }
+
+    public T getLast(){
+        if(tail != null){
+            return tail.getData();
+        }
+        else{
+            return null;
+        }
+    }
+
+    public Node<T> getHead(){
+        return head;
     }
 
     public T remove(int index){
@@ -93,14 +123,10 @@ public class LinkedList<T>{
 
     public T remove (T element){
         if(head.getData().equals(element)){
-            Node headCpy = head;
-            head = head.getNext();
-            return (T) headCpy.getData();
+            return removeFirst();
         }
         else if(tail.getData().equals(element)){
-            Node tailCpy = tail;
-            tail = tail.getLast();
-            return (T) tailCpy.getData();
+            return removeLast();
         }
         else {
             Node<T> nodeToRemove = head;
@@ -140,56 +166,25 @@ public class LinkedList<T>{
         }
     }
 
-    public T getFirst(){
-        if(head != null){
-            return head.getData();
-        }
-        else{
-            return null;
-        }
+    public int size(){
+        return size;
     }
 
-    public T getLast(){
-        if(tail != null){
-            return tail.getData();
+    public void clear(){
+        Node n = head.getNext();
+        head.setNext(null);
+        head = null;
+        while(n != null){
+            Node next = n.getNext();
+            n.setLast(null);
+            n.setNext(null);
+            n = null;
+            n = next;
         }
-        else{
-            return null;
-        }
-    }
 
-    public Node<T> getHead(){
-        return head;
-    }
-
-    public void addFirst(T element){
-        Node newNode = new Node<T>(element);
-
-        if(tail == null){
-            head = newNode;
-            tail = newNode;
-        }
-        else{
-            newNode.setNext(head);
-            head.setLast(newNode);
-            head=newNode;
-        }
-        size++;
-    }
-
-    public void addLast(T element){
-        Node newNode = new Node<T>(element);
-
-        if(tail == null){
-            head = newNode;
-            tail = newNode;
-        }
-        else{
-            newNode.setLast(tail);
-            tail.setNext(newNode);
-            tail=newNode;
-        }
-        size++;
+        this.head = null;
+        this.tail = null;
+        size = 0;
     }
 
     private void addAtIndex(int  index, T element){
@@ -206,6 +201,8 @@ public class LinkedList<T>{
         nodeAtIndex.setLast(newNode);
         newNode.setLast(nodeBeforeIndex);
         newNode.setNext(nodeAtIndex);
+
+        size++;
     }
 
     private Node removeNode(Node<T> nodeToRemove){

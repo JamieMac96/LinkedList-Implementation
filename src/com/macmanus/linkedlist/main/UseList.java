@@ -26,6 +26,8 @@ public class UseList {
         }
 
         myStrings.remove(0);
+        String returnString = myStrings.remove("List");
+        System.out.println("return from remove: " + returnString);
 
         System.out.println("\nAfter removing:");
 
