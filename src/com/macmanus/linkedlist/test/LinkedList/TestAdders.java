@@ -1,7 +1,9 @@
-package com.macmanus.linkedlist.test;
+package com.macmanus.linkedlist.test.LinkedList;
 
 import com.macmanus.linkedlist.main.LinkedList;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestAdders {
     @Test
@@ -14,9 +16,9 @@ public class TestAdders {
         list.add(11);
         list.add(7667);
 
-        assert(list.size() == 5);
-        assert(list.getFirst() == 1);
-        assert(list.getLast() == 7667);
+        assertTrue(list.size() == 5);
+        assertTrue(list.getFirst() == 1);
+        assertTrue(list.getLast() == 7667);
     }
 
     @Test
@@ -30,8 +32,8 @@ public class TestAdders {
         list.add(2,7667);
         list.add(0, 411);
 
-        assert(list.size() == 3);
-        assert(list.getFirst() == 411);
-        assert(list.get(2) == 7667);
+        assertTrue(list.size() == 6);
+        assertTrue(list.getFirst() == 411);
+        assertTrue(list.get(3) == 7667);
     }
 }

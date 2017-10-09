@@ -1,7 +1,9 @@
-package com.macmanus.linkedlist.test;
+package com.macmanus.linkedlist.test.LinkedList;
 
 import com.macmanus.linkedlist.main.LinkedList;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestClear {
 
@@ -17,7 +19,7 @@ public class TestClear {
 
         list.clear();
 
-        assert(list.getFirst() == null);
-        assert(list.getLast() == null);
+        assertTrue(list.getFirst() == null);
+        assertTrue(list.getLast() == null);
     }
 }

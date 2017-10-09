@@ -58,6 +58,10 @@ public class LinkedList<T>{
 
     public T get(int index) throws IndexOutOfBoundsException{
 
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException("Index: " + index + " does not exist in linkedlist of length " + size);
+        }
+
         if(head == null){
             return null;
         }
@@ -112,11 +116,9 @@ public class LinkedList<T>{
 
             Node nodeToRemove = head;
             while (ctr < index && nodeToRemove.getNext() != null) {
-                System.out.println("ctr: " + ctr + "  Node: " + nodeToRemove.toString());
                 nodeToRemove = nodeToRemove.getNext();
                 ctr++;
             }
-            size--;
             return (T) removeNode(nodeToRemove).getData();
         }
     }
@@ -154,11 +156,14 @@ public class LinkedList<T>{
         return (T) removeTailAndReturnCopy().getData();
     }
 
-    public void set(int index, T element){
-        if (index <= 0) {
+    public void set(int index, T element) throws IndexOutOfBoundsException{
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException("Index: " + index + " does not exist in linkedlist of length " + size);
+        }
+        if (index == 0) {
             head.setData(element);
         }
-        else if (index >= size) {
+        else if (index == size - 1) {
             tail.setData(element);
         }
         else {
@@ -187,6 +192,25 @@ public class LinkedList<T>{
         size = 0;
     }
 
+    @Override
+    public String toString(){
+        String output = "[";
+
+        Node<T> currentNode = head;
+        while(currentNode != null){
+            if(currentNode == tail){
+                output += tail.getData() + "]";
+                currentNode = null;
+            }
+            else{
+                output += currentNode.getData() + ", ";
+                currentNode = currentNode.getNext();
+            }
+        }
+
+        return output;
+    }
+
     private void addAtIndex(int  index, T element){
         int ctr = 0;
         Node nodeAtIndex = head;
@@ -206,7 +230,6 @@ public class LinkedList<T>{
     }
 
     private Node removeNode(Node<T> nodeToRemove){
-        System.out.println(nodeToRemove);
         Node temp = nodeToRemove;
 
         Node last = nodeToRemove.getLast();
@@ -219,23 +242,23 @@ public class LinkedList<T>{
         nodeToRemove.setNext(null);
         nodeToRemove = null;
         size--;
-        return nodeToRemove;
+        return temp;
     }
 
-    private void setNodeAtIndex(int index, T element){
-        if(index >= size){
-            return;
+    private void setNodeAtIndex(int index, T element) throws IndexOutOfBoundsException{
+        if(index >= size || index < 0){
+            throw new IndexOutOfBoundsException("Index: " + index + " does not exist in linkedlist of length " + size);
         }
 
         int ctr = 0;
         Node nodeToBeSet = head;
 
-        while (ctr != index) {
+        while (ctr < index) {
             nodeToBeSet = nodeToBeSet.getNext();
+            ctr++;
         }
 
         nodeToBeSet.setData(element);
-
     }
 
     private Node removeHeadAndReturnCopy(){
@@ -252,7 +275,7 @@ public class LinkedList<T>{
     private Node removeTailAndReturnCopy(){
         Node tempTail = tail;
         if(size > 1){
-            tail = tail.getNext();
+            tail = tail.getLast();
         }
         else{
             head = tail = null;
