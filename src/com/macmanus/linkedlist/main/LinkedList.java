@@ -29,7 +29,7 @@ public class LinkedList<T>{
     }
 
     public void addFirst(T element){
-        Node newNode = new Node<T>(element);
+        Node<T> newNode = new Node<T>(element);
 
         if(tail == null){
             head = newNode;
@@ -44,7 +44,7 @@ public class LinkedList<T>{
     }
 
     public void addLast(T element){
-        Node newNode = new Node<T>(element);
+        Node<T> newNode = new Node<T>(element);
 
         if(tail == null){
             head = newNode;
@@ -67,14 +67,14 @@ public class LinkedList<T>{
         }
 
         int ctr = 0;
-        Node current = head;
+        Node<T> current = head;
 
         while(ctr < index){
             current = current.getNext();
             ctr++;
         }
 
-        return (T) current.getData();
+        return current.getData();
     }
 
     public T getFirst(){
@@ -96,22 +96,22 @@ public class LinkedList<T>{
 
         if(index == 0){
             size--;
-            return (T) removeHeadAndReturnCopy().getData();
+            return removeHeadAndReturnCopy().getData();
         }
         else if(index == size -1){
             size--;
-            return (T) removeTailAndReturnCopy().getData();
+            return removeTailAndReturnCopy().getData();
         }
 
         int ctr = 0;
-        Node nodeToRemove = head;
+        Node<T> nodeToRemove = head;
 
         while (ctr < index && nodeToRemove.getNext() != null) {
             nodeToRemove = nodeToRemove.getNext();
             ctr++;
         }
 
-        return (T) removeNode(nodeToRemove).getData();
+        return removeNode(nodeToRemove).getData();
     }
 
     public T remove (T element){
@@ -137,12 +137,12 @@ public class LinkedList<T>{
 
     public T removeFirst(){
         size--;
-        return (T) removeHeadAndReturnCopy().getData();
+        return removeHeadAndReturnCopy().getData();
     }
 
     public T removeLast(){
         size--;
-        return (T) removeTailAndReturnCopy().getData();
+        return removeTailAndReturnCopy().getData();
     }
 
     public void set(int index, T element) throws IndexOutOfBoundsException{
@@ -164,12 +164,12 @@ public class LinkedList<T>{
     }
 
     public void clear(){
-        Node n = head.getNext();
+        Node<T> n = head.getNext();
         head.setNext(null);
         head = null;
 
         while(n != null){
-            Node next = n.getNext();
+            Node<T> next = n.getNext();
             n.setLast(null);
             n.setNext(null);
             n = null;
@@ -202,15 +202,15 @@ public class LinkedList<T>{
 
     private void addAtIndex(int  index, T element){
         int ctr = 0;
-        Node nodeAtIndex = head;
-        Node newNode = new Node<T>(element);
+        Node<T> nodeAtIndex = head;
+        Node<T> newNode = new Node<T>(element);
 
         while(ctr < index){
             nodeAtIndex = nodeAtIndex.getNext();
             ctr++;
         }
 
-        Node nodeBeforeIndex = nodeAtIndex.getLast();
+        Node<T> nodeBeforeIndex = nodeAtIndex.getLast();
         nodeBeforeIndex.setNext(newNode);
         nodeAtIndex.setLast(newNode);
         newNode.setLast(nodeBeforeIndex);
@@ -218,11 +218,11 @@ public class LinkedList<T>{
         size++;
     }
 
-    private Node removeNode(Node<T> nodeToRemove){
-        Node temp = nodeToRemove;
+    private Node<T> removeNode(Node<T> nodeToRemove){
+        Node<T> temp = nodeToRemove;
 
-        Node last = nodeToRemove.getLast();
-        Node next = nodeToRemove.getNext();
+        Node<T> last = nodeToRemove.getLast();
+        Node<T> next = nodeToRemove.getNext();
 
         last.setNext(next);
         next.setLast(last);
@@ -238,7 +238,7 @@ public class LinkedList<T>{
         checkIndex(index);
 
         int ctr = 0;
-        Node nodeToBeSet = head;
+        Node<T> nodeToBeSet = head;
 
         while (ctr < index) {
             nodeToBeSet = nodeToBeSet.getNext();
@@ -248,8 +248,8 @@ public class LinkedList<T>{
         nodeToBeSet.setData(element);
     }
 
-    private Node removeHeadAndReturnCopy(){
-        Node tempHead = head;
+    private Node<T> removeHeadAndReturnCopy(){
+        Node<T> tempHead = head;
 
         if(size > 1){
             head = head.getNext();
@@ -261,8 +261,8 @@ public class LinkedList<T>{
         return tempHead;
     }
 
-    private Node removeTailAndReturnCopy(){
-        Node tempTail = tail;
+    private Node<T> removeTailAndReturnCopy(){
+        Node<T> tempTail = tail;
 
         if(size > 1){
             tail = tail.getLast();

@@ -38,17 +38,14 @@ public class Node<T> {
         if(last != null && next != null) {
             return last.getData() + "<====" + data + "====>" + next.getData();
         }
-        else if(last != null && next == null){
+        else if(last != null){
             return last.getData() + "<====" + data + "====>null";
         }
-        else if(last == null && next != null){
+        else if(next != null){
             return "null<====" + data + "====>" + next.getData();
         }
-        else if(last == null && next == null){
-            return "null<====" + data + "====>null";
-        }
         else{
-            return data + "";
+            return "null<====" + data + "====>null";
         }
     }
 }
