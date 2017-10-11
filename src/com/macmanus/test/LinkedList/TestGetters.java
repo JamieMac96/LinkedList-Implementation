@@ -1,7 +1,6 @@
-package com.macmanus.linkedlist.test.LinkedList;
+package com.macmanus.test.LinkedList;
 
-import com.macmanus.linkedlist.main.LinkedList;
-import org.junit.Before;
+import com.macmanus.linkedlist.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,10 +19,10 @@ public class TestGetters {
         list.add("haha");
         list.add("jeff");
         list.add("keyboard");
-        list.add("test");
+        list.add("com/macmanus/test");
         list.add("cat");
         list.add("phone");
-        list.add("test");
+        list.add("com/macmanus/test");
         list.add("mouse");
         list.add("string");
         list.add("words");

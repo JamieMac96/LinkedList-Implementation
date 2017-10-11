@@ -1,4 +1,4 @@
-package com.macmanus.linkedlist.main;
+package com.macmanus.linkedlist;
 
 public class Node<T> {
     private Node<T> next;

@@ -1,7 +1,6 @@
-package com.macmanus.linkedlist.test.LinkedList;
+package com.macmanus.test.LinkedList;
 
-import com.macmanus.linkedlist.main.LinkedList;
-import org.junit.Before;
+import com.macmanus.linkedlist.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

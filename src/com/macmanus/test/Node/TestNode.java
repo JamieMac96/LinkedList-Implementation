@@ -1,6 +1,6 @@
-package com.macmanus.linkedlist.test.Node;
+package com.macmanus.test.Node;
 
-import com.macmanus.linkedlist.main.Node;
+import com.macmanus.linkedlist.Node;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
