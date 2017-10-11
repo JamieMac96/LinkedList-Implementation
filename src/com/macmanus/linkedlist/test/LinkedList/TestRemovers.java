@@ -1,38 +1,18 @@
 package com.macmanus.linkedlist.test.LinkedList;
 
 import com.macmanus.linkedlist.main.LinkedList;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestRemovers {
-    @Test
-    public void testRemoveItem(){
-        LinkedList<String> list = new LinkedList<String>();
+    private LinkedList<Double> list;
 
-        list.add("LONGSTRING123");
-        list.add("paper");
-        list.add("blah");
-        list.add("haha");
-        list.add("jeff");
-        list.add("keyboard");
-        list.add("test");
-        list.add("cat");
-        list.add("phone");
-        list.add("test");
-        list.add("mouse");
-        list.add("string");
-        list.add("words");
-
-        assertTrue(list.remove("paper").equals("paper"));
-        assertTrue(list.remove("LONGSTRING123").equals("LONGSTRING123"));
-        assertTrue(list.remove("words").equals("words"));
-        assertTrue(list.size() == 10);
-    }
-
-    @Test
-    public void testRemoveIndex(){
-        LinkedList<Double> list = new LinkedList<>();
+    @BeforeEach
+    void setUp(){
+        list = new LinkedList<>();
 
         list.add(1.1);
         list.add(3.2);
@@ -42,42 +22,34 @@ public class TestRemovers {
         list.add(3.9);
         list.add(12.4);
 
+        assertTrue(list.size() == 7);
+    }
+
+    @Test
+    void testRemoveItem(){
+        assertTrue(list.remove(1.1).equals(1.1));
+        assertTrue(list.remove(12.4).equals(12.4));
+        assertTrue(list.remove(3.6).equals(3.6));
+        assertTrue(list.size() == 4);
+    }
+
+    @Test
+    void testRemoveIndex(){
         assertTrue(list.remove(0) == 1.1);
         assertTrue(list.remove(3) == 4.4);
         assertTrue(list.remove(4) == 12.4);
         assertTrue(list.size() == 4);
     }
 
-    @Test void testRemoveFirst(){
-        LinkedList<Integer> list = new LinkedList<>();
-
-        list.add(1);
-        list.add(700000);
-        list.add(35);
-        list.add(11);
-        list.add(7667);
-        list.add(12345);
-
-        int result = list.removeFirst();
-
-        assertTrue(result == 1);
-        assertTrue(list.size() == 5);
+    @Test
+    void testRemoveFirst(){
+        assertTrue(list.removeFirst() == 1.1);
+        assertTrue(list.size() == 6);
     }
 
     @Test
-    public void testRemoveLast(){
-        LinkedList<Long> list = new LinkedList<>();
-
-        list.add(1111111111111111111L);
-        list.add(700000L);
-        list.add(35L);
-        list.add(11L);
-        list.add(7667L);
-        list.add(12345L);
-
-        long result = list.removeLast();
-
-        assertTrue(result == 12345L);
-        assertTrue(list.size() == 5);
+    void testRemoveLast(){
+        assertTrue(list.removeLast() == 12.4);
+        assertTrue(list.size() == 6);
     }
 }

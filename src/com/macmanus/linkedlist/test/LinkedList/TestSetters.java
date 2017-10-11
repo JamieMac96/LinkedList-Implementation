@@ -1,54 +1,43 @@
 package com.macmanus.linkedlist.test.LinkedList;
 
 import com.macmanus.linkedlist.main.LinkedList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSetters {
+    private LinkedList<Long> list;
+    @BeforeEach
+    void setUp(){
+        list = new LinkedList<>();
+
+        list.add(12345656666L);
+        list.add(321L);
+        list.add(1000000000000000000L);
+        list.add(666L);
+        list.add(6776L);
+        list.add(4654L);
+    }
 
     @Test
     public void testSetFirst(){
-        LinkedList<Double> list = new LinkedList<>();
+        list.set(0, 1321L);
 
-        list.add(1.1);
-        list.add(3.2);
-        list.add(5.3);
-        list.add(3.6);
-        list.add(4.4);
-
-        list.set(0, 2.2);
-
-        assertEquals(2.2, (double)list.getFirst());
+        assertEquals(1321L, (long)list.getFirst());
     }
 
     @Test
     public void testSetLast(){
-        LinkedList<Double> list = new LinkedList<>();
+        list.set(5, 777L);
 
-        list.add(1.1);
-        list.add(3.2);
-        list.add(5.3);
-        list.add(3.6);
-        list.add(4.4);
-
-        list.set(4, 2.2);
-
-        assertEquals(2.2, (double)list.getLast());
+        assertEquals(777L, (long)list.getLast());
     }
 
     @Test
     public void TestSetMiddleElement(){
-        LinkedList<Double> list = new LinkedList<>();
+        list.set(2, 12L);
 
-        list.add(1.1);
-        list.add(3.2);
-        list.add(5.3);
-        list.add(3.6);
-        list.add(4.4);
-
-        list.set(2, 12.5);
-
-        assertEquals(12.5, (double)list.get(2));
+        assertEquals(12L, (long)list.get(2));
     }
 }

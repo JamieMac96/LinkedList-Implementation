@@ -1,16 +1,18 @@
 package com.macmanus.linkedlist.test.LinkedList;
 
 import com.macmanus.linkedlist.main.LinkedList;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestGetters {
+    private LinkedList<String> list;
 
-    @Test
-    public void testGet(){
-        LinkedList<String> list = new LinkedList<>();
-
+    @BeforeEach
+    void setUp(){
+        list = new LinkedList<>();
 
         list.add("LONGSTRING123");
         list.add("paper");
@@ -25,8 +27,10 @@ public class TestGetters {
         list.add("mouse");
         list.add("string");
         list.add("words");
+    }
 
-
+    @Test
+    public void testGet(){
         assertTrue(list.get(0).equals("LONGSTRING123"));
         assertTrue(list.get(5).equals("keyboard"));
         assertTrue(list.get(12).equals("words"));
@@ -34,27 +38,11 @@ public class TestGetters {
 
     @Test
     public void testGetFirst(){
-        LinkedList<String> list = new LinkedList<>();
-
-        list.add("phone");
-        list.add("test");
-        list.add("mouse");
-        list.add("string");
-        list.add("words");
-
-        assertTrue(list.getFirst() == "phone");
+        assertTrue(list.getFirst() == "LONGSTRING123");
     }
 
     @Test
     public void testGetLast(){
-        LinkedList<String> list = new LinkedList<>();
-
-        list.add("jeff");
-        list.add("test");
-        list.add("computer");
-        list.add("string");
-        list.add("adrian");
-
-        assertTrue(list.getLast() == "adrian");
+        assertTrue(list.getLast() == "words");
     }
 }
