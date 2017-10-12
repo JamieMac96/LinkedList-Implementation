@@ -1,13 +1,11 @@
 package com.macmanus.linkedlist;
 
-public class LinkedList<T>{
 
-    //Head is the first element in the list
-    private Node<T> head;
+import java.util.Iterator;
 
-    //This is the last element in the list
-    private Node<T> tail;
-
+public class LinkedList<T> implements Iterable<T>{
+    private Node<T> head;//Head is the first element in the list
+    private Node<T> tail;//This is the last element in the list
     private int size;
 
     public void add(T element){
@@ -59,12 +57,7 @@ public class LinkedList<T>{
     }
 
     public T get(int index){
-
         checkIndex(index);
-
-        if(head == null){
-            return null;
-        }
 
         int ctr = 0;
         Node<T> current = head;
@@ -78,17 +71,11 @@ public class LinkedList<T>{
     }
 
     public T getFirst(){
-        if(head != null){
-            return head.getData();
-        }
-            return null;
+        return (null != head) ? head.getData() : null;
     }
 
     public T getLast(){
-        if(tail != null){
-            return tail.getData();
-        }
-            return null;
+        return (null != tail) ? tail.getData() : null;
     }
 
     public T remove(int index) throws IndexOutOfBoundsException{
@@ -175,6 +162,7 @@ public class LinkedList<T>{
             n = null;
             n = next;
         }
+
         n = null;
         this.head = null;
         this.tail = null;
@@ -220,17 +208,16 @@ public class LinkedList<T>{
 
     private Node<T> removeNode(Node<T> nodeToRemove){
         Node<T> temp = nodeToRemove;
-
         Node<T> last = nodeToRemove.getLast();
         Node<T> next = nodeToRemove.getNext();
 
         last.setNext(next);
         next.setLast(last);
-
         nodeToRemove.setLast(null);
         nodeToRemove.setNext(null);
         nodeToRemove = null;
         size--;
+
         return temp;
     }
 
@@ -290,5 +277,30 @@ public class LinkedList<T>{
                     + ", Size: "
                     + size);
         }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> it = new Iterator<T>() {
+            private Node<T> currentNode = head;
+
+            @Override
+            public boolean hasNext() {
+                return (currentNode != null);
+            }
+
+            @Override
+            public T next() {
+                T temp = currentNode.getData();
+                currentNode = currentNode.getNext();
+                return temp;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+        return it;
     }
 }
