@@ -14,7 +14,7 @@ public class LinkedList<T>{
         addLast(element);
     }
 
-    public void add(int index, T element) throws IndexOutOfBoundsException{
+    public void add(int index, T element) {
         checkIndexAdd(index);
 
         if(index == 0){
@@ -58,7 +58,7 @@ public class LinkedList<T>{
         size++;
     }
 
-    public T get(int index) throws IndexOutOfBoundsException{
+    public T get(int index){
 
         checkIndex(index);
 
@@ -145,7 +145,7 @@ public class LinkedList<T>{
         return removeTailAndReturnCopy().getData();
     }
 
-    public void set(int index, T element) throws IndexOutOfBoundsException{
+    public void set(int index, T element){
         checkIndex(index);
 
         if (index == 0) {
@@ -234,7 +234,7 @@ public class LinkedList<T>{
         return temp;
     }
 
-    private void setNodeAtIndex(int index, T element) throws IndexOutOfBoundsException{
+    private void setNodeAtIndex(int index, T element){
         checkIndex(index);
 
         int ctr = 0;
@@ -274,7 +274,7 @@ public class LinkedList<T>{
         return tempTail;
     }
 
-    private void checkIndex(int index) throws IndexOutOfBoundsException{
+    private void checkIndex(int index){
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException("Index: "
                     + index
@@ -283,7 +283,7 @@ public class LinkedList<T>{
         }
     }
 
-    private void checkIndexAdd(int index) throws IndexOutOfBoundsException{
+    private void checkIndexAdd(int index){
         if(index < 0 || index > size){
             throw new IndexOutOfBoundsException("Index: "
                     + index
