@@ -1,9 +1,9 @@
 package com.macmanus.linkedlist;
 
-
 import java.util.Iterator;
 
 public class LinkedList<T> implements Iterable<T>{
+
     private Node<T> head;//Head is the first element in the list
     private Node<T> tail;//This is the last element in the list
     private int size;
@@ -15,15 +15,10 @@ public class LinkedList<T> implements Iterable<T>{
     public void add(int index, T element) {
         checkIndexAdd(index);
 
-        if(index == 0){
-            addFirst(element);
-        }
-        else if(index == size){
-            addLast(element);
-        }
-        else{
-            addAtIndex(index, element);
-        }
+        if(index == 0)          addFirst(element);
+        else if(index == size)  addLast(element);
+        else                    addAtIndex(index, element);
+
     }
 
     public void addFirst(T element){
@@ -59,15 +54,12 @@ public class LinkedList<T> implements Iterable<T>{
     public T get(int index){
         checkIndex(index);
 
-        int ctr = 0;
-        Node<T> current = head;
+        if(index == 0)          return getFirst();
+        if(index == size - 1)   return getLast();
 
-        while(ctr < index){
-            current = current.getNext();
-            ctr++;
-        }
+        int middle = size / 2;
 
-        return current.getData();
+        return (index < middle) ? getFromHead(index) : getFromTail(index);
     }
 
     public T getFirst(){
@@ -102,18 +94,13 @@ public class LinkedList<T> implements Iterable<T>{
     }
 
     public T remove (T element){
-        if(head.getData().equals(element)){
-            return removeFirst();
-        }
-        else if(tail.getData().equals(element)){
-            return removeLast();
-        }
+        if(head.getData().equals(element))      return removeFirst();
+        else if(tail.getData().equals(element)) return removeLast();
+
         else {
             Node<T> nodeToRemove = head;
             while (!nodeToRemove.getData().equals(element)) {
-                if (nodeToRemove == null) {
-                    return null;
-                }
+                if (nodeToRemove == null) return null;
                 nodeToRemove = nodeToRemove.getNext();
             }
             Node<T> temp = removeNode(nodeToRemove);
@@ -135,15 +122,10 @@ public class LinkedList<T> implements Iterable<T>{
     public void set(int index, T element){
         checkIndex(index);
 
-        if (index == 0) {
-            head.setData(element);
-        }
-        else if (index == size - 1) {
-            tail.setData(element);
-        }
-        else {
-            setNodeAtIndex(index, element);
-        }
+        if (index == 0)             head.setData(element);
+        else if (index == size - 1) tail.setData(element);
+        else                        setNodeAtIndex(index, element);
+
     }
 
     public int size(){
@@ -206,6 +188,30 @@ public class LinkedList<T> implements Iterable<T>{
         size++;
     }
 
+    private T getFromHead(int index) {
+        int ctr = 0;
+        Node<T> current = head;
+
+        while(ctr < index){
+            current = current.getNext();
+            ctr++;
+        }
+
+        return current.getData();
+    }
+
+    private T getFromTail(int index) {
+        int ctr = size - 1;
+        Node<T> current = tail;
+
+        while(ctr > index){
+            current = current.getLast();
+            ctr--;
+        }
+
+        return current.getData();
+    }
+
     private Node<T> removeNode(Node<T> nodeToRemove){
         Node<T> temp = nodeToRemove;
         Node<T> last = nodeToRemove.getLast();
@@ -238,12 +244,8 @@ public class LinkedList<T> implements Iterable<T>{
     private Node<T> removeHeadAndReturnCopy(){
         Node<T> tempHead = head;
 
-        if(size > 1){
-            head = head.getNext();
-        }
-        else{
-            head = tail = null;
-        }
+        if(size > 1) head = head.getNext();
+        else         head = tail = null;
 
         return tempHead;
     }
@@ -251,12 +253,8 @@ public class LinkedList<T> implements Iterable<T>{
     private Node<T> removeTailAndReturnCopy(){
         Node<T> tempTail = tail;
 
-        if(size > 1){
-            tail = tail.getLast();
-        }
-        else{
-            head = tail = null;
-        }
+        if(size > 1) tail = tail.getLast();
+        else         head = tail = null;
 
         return tempTail;
     }

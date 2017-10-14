@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestIterators {
-    private String[] parallelData;
+    private String[] data;
     private LinkedList<String> list;
     private Iterator it;
     private int ctr;
 
     @BeforeEach
     void setUp(){
-        parallelData = new String[]{"hello", "this", "is", "for", "testing", "purposes", "lad"};
+        data = new String[]{"hello", "this", "is", "for", "testing", "purposes", "lad"};
         list = new LinkedList<>();
 
         list.add("hello");
@@ -38,7 +38,7 @@ class TestIterators {
 
         while (it.hasNext()) {
             String item = (String)it.next();
-            assertEquals(item, parallelData[ctr]);
+            assertEquals(item, data[ctr]);
             ctr++;
         }
 
@@ -48,7 +48,7 @@ class TestIterators {
     @Test
     void testForEach(){
         for(String item: list){
-            assertEquals(item, parallelData[ctr]);
+            assertEquals(item, data[ctr]);
             ctr++;
         }
     }
