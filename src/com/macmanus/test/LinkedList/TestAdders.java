@@ -34,4 +34,14 @@ public class TestAdders {
         assertTrue(list.getFirst() == 1);
         assertTrue(list.get(3) == 11);
     }
+
+    @Test
+    void testAddSingleItem(){
+        LinkedList<String> singleItemList = new LinkedList<>();
+
+        singleItemList.add("hello");
+
+        assertTrue(singleItemList.getFirst().equals(singleItemList.getLast()));
+        assertTrue(singleItemList.size() == 1);
+    }
 }

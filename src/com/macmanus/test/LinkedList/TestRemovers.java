@@ -51,4 +51,18 @@ public class TestRemovers {
         assertTrue(list.removeLast() == 12.4);
         assertTrue(list.size() == 6);
     }
+
+    @Test
+    void testRemoveAllButOne(){
+        list.remove(0);
+        list.remove(1);
+        list.remove(1);
+        list.remove(1);
+        list.remove(1);
+        list.remove(1);
+
+        assertTrue(list.getFirst() == 3.2);
+        assertTrue(list.getFirst().equals(list.getLast()));
+        assertTrue(list.size() == 1);
+    }
 }

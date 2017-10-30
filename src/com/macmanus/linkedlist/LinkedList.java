@@ -1,6 +1,7 @@
 package com.macmanus.linkedlist;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class LinkedList<T> implements Iterable<T>{
 
@@ -167,7 +168,51 @@ public class LinkedList<T> implements Iterable<T>{
             }
         }
 
+        if(output.equals("[")) output += "]";
+
         return output;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> it = new Iterator<T>() {
+            private Node<T> currentNode = head;
+
+            @Override
+            public boolean hasNext() {
+                return (currentNode != null);
+            }
+
+            @Override
+            public T next() {
+                T temp = currentNode.getData();
+                currentNode = currentNode.getNext();
+                return temp;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+
+        return it;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof LinkedList){
+            LinkedList<T> list = (LinkedList<T>) o;
+            if(listEquals(list)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(head, tail, size);
     }
 
     private void addAtIndex(int  index, T element){
@@ -244,7 +289,7 @@ public class LinkedList<T> implements Iterable<T>{
     private Node<T> removeHeadAndReturnCopy(){
         Node<T> tempHead = head;
 
-        if(size > 1) head = head.getNext();
+        if(size >= 1) head = head.getNext();
         else         head = tail = null;
 
         return tempHead;
@@ -253,7 +298,7 @@ public class LinkedList<T> implements Iterable<T>{
     private Node<T> removeTailAndReturnCopy(){
         Node<T> tempTail = tail;
 
-        if(size > 1) tail = tail.getLast();
+        if(size >= 1) tail = tail.getLast();
         else         head = tail = null;
 
         return tempTail;
@@ -277,28 +322,27 @@ public class LinkedList<T> implements Iterable<T>{
         }
     }
 
-    @Override
-    public Iterator<T> iterator() {
-        Iterator<T> it = new Iterator<T>() {
-            private Node<T> currentNode = head;
+    private boolean listEquals(LinkedList<T> list){
+        if(list.size() == this.size){
+            if(list.getFirst().equals(this.head.getData()) &&
+                    list.getLast().equals(this.tail.getData())){
+                if(this.size <= 2){
+                    return true;
+                }
+                else{
+                    Node currentNode = head;
 
-            @Override
-            public boolean hasNext() {
-                return (currentNode != null);
+                    for(T item: list){
+                        if(!item.equals(currentNode.getData())){
+                            return false;
+                        }
+                        currentNode = currentNode.getNext();
+                    }
+                    return true;
+                }
             }
+        }
 
-            @Override
-            public T next() {
-                T temp = currentNode.getData();
-                currentNode = currentNode.getNext();
-                return temp;
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-        };
-        return it;
+        return false;
     }
 }
